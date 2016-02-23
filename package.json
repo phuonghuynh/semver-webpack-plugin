@@ -1,0 +1,25 @@
+{
+  "name": "semver-webpack-plugin",
+  "author": "phuonghuynh",
+  "license": "MIT",
+  "main": "index.js",
+  "version": "1.0.0",
+  "description": "Server webpack plugin, see http://semver.org",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/phuonghuynh/semver-webpack-plugin.git"
+  },
+  "scripts": {
+  },
+  "keywords": [
+    "webpack", "semver", "bump", "version"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "semver": "latest"
+  },
+  "engineStrict": true,
+  "engines": {
+    "node": "^5.6.0"
+  }
+}
