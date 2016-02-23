@@ -1,4 +1,4 @@
-var semver = require("semver@5.1.0");
+var semver = require("semver");
 var fs = require("fs");
 
 function SemverWebpackPlugin(options) {
