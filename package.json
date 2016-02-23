@@ -14,9 +14,10 @@
   "keywords": [
     "webpack", "semver", "bump", "version"
   ],
-  "dependencies": {},
-  "devDependencies": {
+  "dependencies": {
     "semver": "latest"
+  },
+  "devDependencies": {
   },
   "engineStrict": true,
   "engines": {
