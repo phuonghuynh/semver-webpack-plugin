@@ -12,7 +12,6 @@ try {
 catch (e) {}
 
 function SemverWebpackPlugin(options) {
-  // Configure your plugin with options...
   this.options = options || {};
   this.options.files = this.options.files || [];
 }
@@ -58,10 +57,9 @@ SemverWebpackPlugin.prototype.apply = function (compiler) {
 
   compiler.plugin("emit", function (compilation, callback) {
     outMap.forEach((json, file) => {
-      var f = require(file);
-      f.version = json.version;
+      fs.writeFile(file, JSON.stringify(json, null, 2));
       compilation.assets[file] = {
-        source: function () {return JSON.stringify(f, null, 2);},
+        source: function () {return JSON.stringify(json, null, 2);},
         size: function () {return fs.statSync(file).size; }
       };
     });
