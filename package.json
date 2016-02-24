@@ -3,7 +3,7 @@
   "author": "phuonghuynh",
   "license": "MIT",
   "main": "index.js",
-  "version": "1.0.2-rc.1",
+  "version": "1.0.2",
   "description": "Server webpack plugin, see http://semver.org",
   "repository": {
     "type": "git",
@@ -15,7 +15,8 @@
     "webpack", "semver", "bump", "version"
   ],
   "dependencies": {
-    "semver": "^5.1.0"
+    "semver": "latest",
+    "command-line-args": "latest"
   },
   "devDependencies": {
   },
