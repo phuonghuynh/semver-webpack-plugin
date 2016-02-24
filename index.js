@@ -58,8 +58,10 @@ SemverWebpackPlugin.prototype.apply = function (compiler) {
 
   compiler.plugin("emit", function (compilation, callback) {
     outMap.forEach((json, file) => {
+      var f = require(file);
+      f.version = json.version;
       compilation.assets[file] = {
-        source: function () {return JSON.stringify(json, null, 2);},
+        source: function () {return JSON.stringify(f, null, 2);},
         size: function () {return fs.statSync(file).size; }
       };
     });
