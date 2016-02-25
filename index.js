@@ -1,5 +1,3 @@
-"use strict";
-
 var semver = require("semver");
 var fs = require("fs");
 var cmdArgs = require('command-line-args');
@@ -12,6 +10,18 @@ try {
 }
 catch (e) {}
 
+function extractIncArgs(options) {
+  var incArgs = args["semver-webpack-plugin-inc-args"];
+  if (incArgs) {
+    incArgs = incArgs.split(",");
+  }
+  incArgs = incArgs || options.incArgs || [];
+  if (incArgs.length > 2) {
+    throw new Error("`incArgs` must have one or two params");
+  }
+  return incArgs;
+}
+
 function SemverWebpackPlugin(options) {
   if (args["semver-webpack-plugin-disable"]) {
     return;
@@ -20,7 +30,7 @@ function SemverWebpackPlugin(options) {
   this.options = options || {};
   this.options.files = this.options.files || [];
 
-  var incArgs = this.extractIncArgs();
+  var incArgs = extractIncArgs(this.options);
   var files = this.options.files;
   if (files.length === 0) {
     throw new Error("`files` must have at least one file");
@@ -43,18 +53,6 @@ function SemverWebpackPlugin(options) {
 
   this.outMap = outMap;
 }
-
-SemverWebpackPlugin.prototype.extractIncArgs = function() {
-  var incArgs = args["semver-webpack-plugin-inc-args"];
-  if (incArgs) {
-    incArgs = incArgs.split(",");
-  }
-  incArgs = incArgs || this.options.incArgs || [];
-  if (incArgs.length > 2) {
-    throw new Error("`incArgs` must have one or two params");
-  }
-  return incArgs;
-};
 
 SemverWebpackPlugin.prototype.apply = function (compiler) {
   if (args["semver-webpack-plugin-disable"]) {

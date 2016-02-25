@@ -3,8 +3,8 @@
   "author": "phuonghuynh",
   "license": "MIT",
   "main": "index.js",
-  "version": "1.0.6",
-  "description": "Server webpack plugin, see http://semver.org",
+  "version": "1.0.7",
+  "description": "Semver webpack plugin, see http://semver.org",
   "repository": {
     "type": "git",
     "url": "https://github.com/phuonghuynh/semver-webpack-plugin.git"
