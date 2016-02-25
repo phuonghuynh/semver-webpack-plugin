@@ -43,7 +43,6 @@ module.exports = {
 - package.json
 ```json
 {
-  ...
   "scripts": {
     "build": "grunt build --semver-webpack-plugin-disable",
     "dev": "webpack-dev-server --progress --colors",
@@ -53,9 +52,7 @@ module.exports = {
   },
   "devDependencies": {
     "clean-webpack-plugin": "latest",
-    ...
   }
-  ...
 }
 ```
 
