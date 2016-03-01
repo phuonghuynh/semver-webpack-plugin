@@ -5,7 +5,8 @@ var args = {};
 try {
   args = cmdArgs([
     {name: 'semver-webpack-plugin-disable', type: Boolean, defaultValue: false},
-    {name: 'semver-webpack-plugin-inc-args', type: String}
+    {name: 'semver-webpack-plugin-inc-args', type: String},
+    {name: 'semver-webpack-plugin-files', type: String}
   ]).parse();
 }
 catch (e) {}
@@ -40,12 +41,8 @@ function SemverWebpackPlugin(options) {
   var outMap = new Map();
   files.forEach(function (file) {
     var f = require(file);
-    if (incArgs.length === 2) {//TODO refactor `inc` params
-      f.version = semver.inc(f.version, incArgs[0], incArgs[1]);
-    }
-    else if (incArgs.length === 1) {
-      f.version = semver.inc(f.version, incArgs[0]);
-    }
+    incArgs.unshift(f.version);
+    f.version = semver.inc.apply(this, incArgs);
     outMap.set(file, f);
     fs.writeFileSync(file, JSON.stringify(f, null, 2));
     (typeof done === "function") && done(f);
