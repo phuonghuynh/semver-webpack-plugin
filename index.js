@@ -7,7 +7,7 @@ try {
     {name: 'semver-webpack-plugin-disable', type: Boolean, defaultValue: false},
     {name: 'semver-webpack-plugin-inc-args', type: String},
     {name: 'semver-webpack-plugin-files', type: String}
-  ]).parse();
+  ]);
 }
 catch (e) {}
 
