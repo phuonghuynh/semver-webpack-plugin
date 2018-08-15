@@ -6,7 +6,8 @@ try {
   args = cmdArgs([
     {name: 'semver-webpack-plugin-disable', type: Boolean, defaultValue: false},
     {name: 'semver-webpack-plugin-inc-args', type: String},
-    {name: 'semver-webpack-plugin-files', type: String}
+    {name: 'semver-webpack-plugin-files', type: String},
+    {name: 'semver-webpack-plugin-indent', type: Number, defaultValue: 2}
   ]);
 }
 catch (e) {}
@@ -30,6 +31,7 @@ function SemverWebpackPlugin(options) {
 
   this.options = options || {};
   this.options.files = this.options.files || [];
+  this.options.indent = this.options.indent || args["semver-webpack-plugin-disable"] || 2;
 
   var incArgs = extractIncArgs(this.options);
   var files = this.options.files;
@@ -44,7 +46,7 @@ function SemverWebpackPlugin(options) {
     incArgs.unshift(f.version);
     f.version = semver.inc.apply(this, incArgs);
     outMap.set(file, f);
-    fs.writeFileSync(file, JSON.stringify(f, null, 2));
+    fs.writeFileSync(file, JSON.stringify(f, null, this.options.indent));
     (typeof done === "function") && done(f);
   });
 
@@ -60,7 +62,7 @@ SemverWebpackPlugin.prototype.apply = function (compiler) {
   compiler.plugin("emit", function (compilation, callback) {
     outMap.forEach((json, file) => {
       compilation.assets[file] = {
-        source: function () {return new Buffer(JSON.stringify(json, null, 2));},
+        source: function () {return new Buffer(JSON.stringify(json, null, this.options.indent));},
         size: function () {return Buffer.byteLength(this.source(), 'utf8'); }
       };
     });

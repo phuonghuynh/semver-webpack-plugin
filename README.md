@@ -64,6 +64,7 @@ new SemverWebpackPlugin({options})
 `options` properties:
 - `files`: list of input files, should are absolute paths
 - `incArgs`: `arguments` will be passed to function `semver.inc()`, see [node-semver](https://github.com/npm/node-semver)
+- `indent`: number of spaces in indentation
 
 
 ### Arguments
