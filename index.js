@@ -40,13 +40,14 @@ function SemverWebpackPlugin(options) {
   }
 
   var done = this.options.done;
+  var indent = this.options indent;
   var outMap = new Map();
   files.forEach(function (file) {
     var f = require(file);
     incArgs.unshift(f.version);
     f.version = semver.inc.apply(this, incArgs);
     outMap.set(file, f);
-    fs.writeFileSync(file, JSON.stringify(f, null, this.options.indent));
+    fs.writeFileSync(file, JSON.stringify(f, null, indent));
     (typeof done === "function") && done(f);
   });
 
@@ -58,11 +59,12 @@ SemverWebpackPlugin.prototype.apply = function (compiler) {
     return;
   }
 
+  var indent = this.options.indent;
   var outMap = this.outMap;
   compiler.plugin("emit", function (compilation, callback) {
     outMap.forEach((json, file) => {
       compilation.assets[file] = {
-        source: function () {return new Buffer(JSON.stringify(json, null, this.options.indent));},
+        source: function () {return new Buffer(JSON.stringify(json, null, indent));},
         size: function () {return Buffer.byteLength(this.source(), 'utf8'); }
       };
     });
