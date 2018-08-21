@@ -1,7 +1,7 @@
-var semver = require("semver");
-var fs = require("fs");
-var cmdArgs = require('command-line-args');
-var args = {};
+const semver = require("semver");
+const fs = require("fs");
+const cmdArgs = require('command-line-args');
+let args = {};
 try {
   args = cmdArgs([
     {name: 'semver-webpack-plugin-disable', type: Boolean, defaultValue: false},
@@ -13,7 +13,7 @@ try {
 catch (e) {}
 
 function extractIncArgs(options) {
-  var incArgs = args["semver-webpack-plugin-inc-args"];
+  let incArgs = args["semver-webpack-plugin-inc-args"];
   if (incArgs) {
     incArgs = incArgs.split(",");
   }
@@ -33,17 +33,17 @@ function SemverWebpackPlugin(options) {
   this.options.files = this.options.files || [];
   this.options.indent = this.options.indent || args["semver-webpack-plugin-disable"] || 2;
 
-  var incArgs = extractIncArgs(this.options);
-  var files = this.options.files;
+  const incArgs = extractIncArgs(this.options);
+  const files = this.options.files;
   if (files.length === 0) {
     throw new Error("`files` must have at least one file");
   }
 
-  var done = this.options.done;
-  var indent = this.options indent;
-  var outMap = new Map();
+  const done = this.options.done;
+  const indent = this.options.indent;
+  const outMap = new Map();
   files.forEach(function (file) {
-    var f = require(file);
+    const f = require(file);
     incArgs.unshift(f.version);
     f.version = semver.inc.apply(this, incArgs);
     outMap.set(file, f);
@@ -59,8 +59,8 @@ SemverWebpackPlugin.prototype.apply = function (compiler) {
     return;
   }
 
-  var indent = this.options.indent;
-  var outMap = this.outMap;
+  const indent = this.options.indent;
+  const outMap = this.outMap;
   compiler.plugin("emit", function (compilation, callback) {
     outMap.forEach((json, file) => {
       compilation.assets[file] = {

@@ -3,25 +3,21 @@
   "author": "phuonghuynh",
   "license": "MIT",
   "main": "index.js",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "Semver webpack plugin, see http://semver.org",
   "repository": {
     "type": "git",
     "url": "https://github.com/phuonghuynh/semver-webpack-plugin.git"
   },
-  "scripts": {
-  },
+  "scripts": {},
   "keywords": [
-    "webpack", "semver", "bump", "version"
+    "webpack",
+    "semver",
+    "bump",
+    "version"
   ],
   "dependencies": {
-    "semver": "latest",
-    "command-line-args": "latest"
-  },
-  "devDependencies": {
-  },
-  "engineStrict": true,
-  "engines": {
-    "node": "^5.6.0"
+    "semver": "^5.5.1",
+    "command-line-args": "^5.0.2"
   }
 }
