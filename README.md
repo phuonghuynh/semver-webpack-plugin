@@ -1,5 +1,5 @@
 # semver-webpack-plugin
-A webpack plugic to do [semver](http://semver.org)
+A webpack plugin to do [semver](http://semver.org)
 
 ## Features
 - Bump up `version` using function `semver.inc` fields in json files, ex: `package.json`, `bower.json`
